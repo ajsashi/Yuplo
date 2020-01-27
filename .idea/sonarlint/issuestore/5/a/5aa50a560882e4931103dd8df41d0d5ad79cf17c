@@ -1,3 +1,4 @@
 
-ƒsquid:S1488="`Immediately return this expression instead of assigning it to the temporary variable "retrofit".(ûÉõíüÿÿÿÿ8Ãİ¶¾ü-
+hsquid:UselessImportCheck	"8Remove this unused import 'com.yuplo.base.BaseActivity'.(¹–§¤şÿÿÿÿ8ƒÜ‡ìü-
 hsquid:UselessImportCheck">Remove this unused import 'android.content.SharedPreferences'.(íÎÉr8…ã²Âü-
+rsquid:UselessImportCheck"BRemove this unused import 'androidx.fragment.app.FragmentManager'.(¯­ë‹ıÿÿÿÿ8ƒÜ‡ìü-

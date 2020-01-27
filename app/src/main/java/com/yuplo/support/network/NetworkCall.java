@@ -1,4 +1,4 @@
-package com.yuplo.support;
+package com.yuplo.support.network;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.gson.JsonObject;
 import com.yuplo.model.Model;
 import com.yuplo.presenter.NetworkInterface;
+import com.yuplo.support.network.ApiInterface;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

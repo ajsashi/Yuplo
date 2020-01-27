@@ -5,7 +5,6 @@ import android.content.Context;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
-import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.onurkaganaldemir.ktoastlib.KToast;
@@ -13,10 +12,10 @@ import com.yuplo.R;
 import com.yuplo.base.BaseActivity;
 import com.yuplo.model.Model;
 import com.yuplo.presenter.NetworkInterface;
-import com.yuplo.support.ApiInterface;
+import com.yuplo.support.network.ApiInterface;
 import com.yuplo.support.Constants;
 import com.yuplo.support.MyPreferenceManager;
-import com.yuplo.support.NetworkCall;
+import com.yuplo.support.network.NetworkCall;
 import com.yuplo.support.Utils;
 
 import javax.inject.Inject;
@@ -43,6 +42,10 @@ public class LoginPresenter implements NetworkInterface {
         ((BaseActivity) context).injector().inject(this);
         this.context = context;
         this.pListener = pListener;
+    }
+
+    public Boolean isLoggedIn(){
+        return preferenceManager.getBoolsData(Constants.getLoggedIn());
     }
 
     public void validation(String email, String password) {
@@ -72,7 +75,8 @@ public class LoginPresenter implements NetworkInterface {
 
     @Override
     public void onNetworkSuccess(Response<Model.Login> response) {
-        preferenceManager.storeData(Constants.TOKEN, response.body().getToken());
+        preferenceManager.storeData(Constants.getTOKEN(), response.body().getToken());
+        preferenceManager.storeBoolsData(Constants.getLoggedIn(), true);
         pListener.dismissProgress();
         pListener.navigate();
     }

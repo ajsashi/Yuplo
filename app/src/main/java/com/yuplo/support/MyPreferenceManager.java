@@ -41,6 +41,15 @@ public class MyPreferenceManager {
         return sharedPreferences.getString(Key, null);
     }
 
+    public void storeBoolsData(String Key, boolean s) {
+        editor.putBoolean(Key, s);
+        editor.apply();
+        editor.commit();
+    }
+
+    public Boolean getBoolsData(String Key) {
+        return sharedPreferences.getBoolean(Key, false);
+    }
 
 }
 

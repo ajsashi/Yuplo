@@ -1,4 +1,4 @@
-package com.yuplo.support;
+package com.yuplo.support.network;
 
 import com.google.gson.JsonObject;
 import com.yuplo.model.Model;

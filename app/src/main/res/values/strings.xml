@@ -10,4 +10,8 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="sign_up">Don\'t have an account? Sign Up</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="location_message">Location not found,please turn on your device location</string>
+    <string name="enable_location">Enable Location Permission in App Settings</string>
 </resources>

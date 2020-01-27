@@ -2,6 +2,7 @@ package com.yuplo.view.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -42,10 +43,20 @@ public class LoginActivity extends BaseActivity implements ILoginPresenter {
     }
 
     @Override
+    protected int getFrameLayoutContainerId() {
+        return 0;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        startActivity(new Intent(this,HomeActivity.class));
         injector().inject(this);
         presenter.init(this, this);
+        if(presenter.isLoggedIn()){
+            startActivity(new Intent(this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            return;
+        }
         SpannableString txtSpannable = new SpannableString(getResources().getString(R.string.sign_up));
         StyleSpan boldSpan = new StyleSpan(Typeface.BOLD);
         txtSpannable.setSpan(boldSpan, 23, 30, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -59,6 +70,7 @@ public class LoginActivity extends BaseActivity implements ILoginPresenter {
     public void login() {
 //        presenter.validation(email.getText().toString().trim(), password.getText().toString().trim());
         presenter.validation("praveenkumar.aitech@gmail.com", "12345678");
+
     }
 
     @OnClick(R.id.txt_signUp)

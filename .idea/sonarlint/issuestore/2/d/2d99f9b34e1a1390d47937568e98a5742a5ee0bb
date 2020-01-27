@@ -1,0 +1,5 @@
+
+—squid:S1319"tThe type of the "FRAGMENTS" object should be an interface such as "List" rather than the implementation "ArrayList".(×‡¼Ùûÿÿÿÿ8µíÌ‘ı-
+squid:S1319;"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(„¹èÛ8ë¢à¼ı-
+tsquid:S2068"V'PASSWORD' detected in this expression, review this potentially hard-coded credential.(ÃåÅÏ8¤ø¨åü-
+@squid:S2386"Make this member "protected".(×‡¼Ùûÿÿÿÿ8§—À‘ı-

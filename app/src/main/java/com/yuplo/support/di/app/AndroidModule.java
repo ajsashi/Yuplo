@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 
+import androidx.fragment.app.FragmentManager;
+
+import com.yuplo.base.BaseActivity;
 import com.yuplo.support.Constants;
 import com.yuplo.support.MyPreferenceManager;
 
@@ -58,11 +61,11 @@ public Retrofit provideRetrofit(){
                 .connectTimeout(180, TimeUnit.SECONDS)
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
+        return new Retrofit.Builder()
+                .baseUrl(Constants.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
-        return retrofit;
     }
+
 }

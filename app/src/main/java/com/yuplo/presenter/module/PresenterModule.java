@@ -1,9 +1,9 @@
-package com.yuplo.presenter;
+package com.yuplo.presenter.module;
 
-import android.util.Log;
-
+import com.yuplo.presenter.HomePresenter;
 import com.yuplo.presenter.login.LoginPresenter;
 import com.yuplo.presenter.signIn.SignUpPresenter;
+import com.yuplo.view.fragment.ProfileScreenFragment;
 
 import dagger.Module;
 import dagger.Provides;
@@ -20,5 +20,11 @@ public class PresenterModule {
     public SignUpPresenter signUpPresenter(){
         return new SignUpPresenter();
     }
+
+    @Provides
+    public HomePresenter homeScreenPresenter(){
+        return new HomePresenter();
+    }
+
 
 }

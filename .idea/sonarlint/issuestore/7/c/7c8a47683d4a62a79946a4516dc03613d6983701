@@ -1,2 +1,6 @@
 
-dsquid:S1126"AReplace this if-then-else statement by a single return statement.(´ÓÅıÿÿÿÿ8®Ïÿ¾ü-
+Fsquid:S11480"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ÛÀ“ı-
+dsquid:S1126!"AReplace this if-then-else statement by a single return statement.(´ÓÅıÿÿÿÿ8®Ïÿ¾ü-
+ysquid:S14883"\Immediately return this expression instead of assigning it to the temporary variable "mode".(Ï¼¢O8ÛÀ“ı-
+Ksquid:S1604E"(Make this anonymous inner class a lambda(ƒ¡ÂÊşÿÿÿÿ8…èÇ“ı-
+ssquid:UselessImportCheck"CRemove this unused import 'androidx.fragment.app.FragmentActivity'.(Êñô–úÿÿÿÿ8¯ôæ½ı-

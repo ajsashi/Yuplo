@@ -11,9 +11,9 @@ import com.yuplo.R;
 import com.yuplo.base.BaseActivity;
 import com.yuplo.model.Model;
 import com.yuplo.presenter.NetworkInterface;
-import com.yuplo.support.ApiInterface;
+import com.yuplo.support.network.ApiInterface;
 import com.yuplo.support.Constants;
-import com.yuplo.support.NetworkCall;
+import com.yuplo.support.network.NetworkCall;
 import com.yuplo.support.Utils;
 
 import java.util.regex.Matcher;
@@ -46,7 +46,8 @@ public class SignUpPresenter implements NetworkInterface {
     }
 
     public void validation(String fName, String lName, String email, String password, String conPassword) {
-        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+        Pattern pattern = Pattern.compile(
+                Constants.getPasswordPattern());
         Matcher matcher = pattern.matcher(password);
         if (!fName.isEmpty() && !lName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !conPassword.isEmpty()) {
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {

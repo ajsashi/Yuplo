@@ -43,6 +43,11 @@ public class SignUpActivity extends BaseActivity implements ISignUpPresenter {
     }
 
     @Override
+    protected int getFrameLayoutContainerId() {
+        return 0;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         injector().inject(this);
@@ -51,16 +56,11 @@ public class SignUpActivity extends BaseActivity implements ISignUpPresenter {
 
     @OnClick(R.id.btn_signUp)
     public void signUp() {
-//        String sName = fname.getText().toString().trim();
-//        String sLName = lname.getText().toString().trim();
-//        String sEmail = email.getText().toString().trim();
-//        String sPassword = password.getText().toString().trim();
-//        String sConPassword = con_password.getText().toString().trim();
-        String sName = "Jenni";
-        String sLName = "Sashi";
-        String sEmail = "ajsashiapp13@gmail.com";
-        String sPassword = "Test@123";
-        String sConPassword = "Test@123";
+        String sName = fname.getText().toString().trim();
+        String sLName = lname.getText().toString().trim();
+        String sEmail = email.getText().toString().trim();
+        String sPassword = password.getText().toString().trim();
+        String sConPassword = con_password.getText().toString().trim();
         presenter.validation(sName, sLName, sEmail, sPassword, sConPassword);
     }
 
