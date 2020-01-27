@@ -25,7 +25,6 @@ public class Constants {
     public static final int LOCATION_REQUEST_CODE = 100;
     public static final int STORAGE_REQUEST_CODE = 101;
     public static final int IMAGE_PICKER_REQUEST_CODE = 102;
-    public static final HomeActivity.HomeInterface homeInterface = null;
 
     public static JsonObject getUserLoginJson(String email, String password) {
         JsonObject object = new JsonObject();

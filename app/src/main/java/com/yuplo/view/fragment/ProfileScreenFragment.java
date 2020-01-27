@@ -44,7 +44,6 @@ public class ProfileScreenFragment extends BaseFragment implements IFragment {
     @BindView(R.id.profile_image)
     CircleImageView profileImage;
 
-
     public static IFragment newInstance() {
         return new ProfileScreenFragment();
     }
@@ -95,10 +94,10 @@ public class ProfileScreenFragment extends BaseFragment implements IFragment {
                 READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, READ_EXTERNAL_STORAGE)) {
 
-                ActivityCompat.requestPermissions((Activity) context, new String[]{READ_EXTERNAL_STORAGE}, Constants.getStorageRequestCode());
+                requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, Constants.getStorageRequestCode());
             } else {
                 if (isfirst) {
-                    ActivityCompat.requestPermissions((Activity) context, new String[]{READ_EXTERNAL_STORAGE}, Constants.getStorageRequestCode());
+                    requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, Constants.getStorageRequestCode());
 
 
                     preferenceManager.storeData(Constants.getStoragePermission(), "false");
@@ -120,13 +119,22 @@ public class ProfileScreenFragment extends BaseFragment implements IFragment {
 
     private void startIntent() {
 
-        Intent intent= new Intent(Intent.ACTION_PICK);
+        Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, Constants.getImagePickerRequestCode());
     }
 
-    public void updateProfileImage(Uri uri){
+    public void updateProfileImage(Uri uri) {
         profileImage.setImageURI(uri);
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            startIntent();
+        }
     }
 
     @Override
@@ -134,11 +142,9 @@ public class ProfileScreenFragment extends BaseFragment implements IFragment {
         if (resultCode == RESULT_OK &&
                 data != null && data.getData() != null) {
             switch (requestCode) {
-
                 case IMAGE_PICKER_REQUEST_CODE:
-
                     Uri saveUri = data.getData();
-                   updateProfileImage(saveUri);
+                    updateProfileImage(saveUri);
                     Log.d("Image Picker", "Picker");
                     break;
             }

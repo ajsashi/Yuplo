@@ -1,5 +1,7 @@
 package com.yuplo.view.activity;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -15,14 +17,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.yuplo.R;
 import com.yuplo.base.BaseActivity;
 import com.yuplo.base.BaseFragment;
 import com.yuplo.presenter.HomePresenter;
+import com.yuplo.support.Internet.NetworkChangeReceiver;
 import com.yuplo.support.fragmentmanager.YuploFragmentChannel;
 import com.yuplo.support.fragmentmanager.manager.FragmentManagerHandler;
 import com.yuplo.view.fragment.FinalScheduleFragment;
@@ -38,7 +43,8 @@ import butterknife.BindView;
 
 import static com.yuplo.support.Constants.FRAGMENTS;
 
-public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, YuploFragmentChannel, BaseFragment.FragmentInteractionCallback {
+public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
+        YuploFragmentChannel, BaseFragment.FragmentInteractionCallback, NetworkChangeReceiver.NetworkListener {
 
 
     @Inject
@@ -53,11 +59,15 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     DrawerLayout drawerLayout;
     @BindView(R.id.app_bar)
     AppBarLayout appBarLayout;
+    @BindView(R.id.layout)
+    CoordinatorLayout pl;
     @BindView(R.id.activity_home_fl_container)
     FrameLayout flContainer;
     private TextView actionBarTitle;
     ImageView addSchedule;
     private ActionBarDrawerToggle toggle;
+    private Snackbar snackbar;
+    private NetworkChangeReceiver receiver;
 
     @Override
     protected int getLayoutId() {
@@ -72,6 +82,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*Registe Network Broadcast Receiver*/
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new NetworkChangeReceiver();
+        registerReceiver(receiver, filter);
+
+        NetworkChangeReceiver.setListener(this);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -118,6 +134,18 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         FRAGMENTS.add("ScheduleScreenFragment");
         FRAGMENTS.add("NewScheduleScreenFragment");
         FRAGMENTS.add("ManageAddressFragment");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
     }
 
     @Override
@@ -172,17 +200,17 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void showNewSchedule() {
-        simpleFragmentManager.addFragment(NewScheduleScreenFragment.newInstance());
+        simpleFragmentManager.replaceFragment(NewScheduleScreenFragment.newInstance());
     }
 
     @Override
     public void showFinalSchedule() {
-        simpleFragmentManager.addFragment(FinalScheduleFragment.newInstance());
+        simpleFragmentManager.replaceFragment(FinalScheduleFragment.newInstance());
     }
 
     @Override
     public void showManageAddress() {
-        simpleFragmentManager.addFragment(ManageAddressFragment.newInstance());
+        simpleFragmentManager.replaceFragment(ManageAddressFragment.newInstance());
         changeNavigationIcon();
     }
 
@@ -226,4 +254,17 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
+    @Override
+    public void onNetworkChange(boolean status) {
+
+        if (status) {
+            if (snackbar != null && snackbar.isShown()) {
+                snackbar.dismiss();
+            }
+        } else {
+            snackbar = Snackbar
+                    .make(pl, "No Network", Snackbar.LENGTH_INDEFINITE);
+            snackbar.show();
+        }
+    }
 }

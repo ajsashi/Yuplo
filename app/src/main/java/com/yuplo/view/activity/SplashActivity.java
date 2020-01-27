@@ -35,11 +35,13 @@ public class SplashActivity extends BaseActivity {
                 try {
                     int millis = 3000;
                     sleep(millis);
-                    if (preferenceManager.getBoolsData(Constants.getLoggedIn()))
-                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    if (preferenceManager.getBoolsData(Constants.getLoggedIn())){
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+
+                }
                     else
                         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    finish();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -47,4 +49,5 @@ public class SplashActivity extends BaseActivity {
         };
         background.start();
     }
+
 }

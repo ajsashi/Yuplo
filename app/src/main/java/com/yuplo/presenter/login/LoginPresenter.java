@@ -69,6 +69,7 @@ public class LoginPresenter implements NetworkInterface {
         if (utils.isOnline(context)) {
             networkCall.login(apiInterface, data, this);
         } else {
+            pListener.dismissProgress();
             KToast.customColorToast((Activity) context, " Please Check Your Network Connection", Gravity.BOTTOM, KToast.LENGTH_SHORT, R.color.red);
         }
     }

@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textSize">15sp</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
 
     <style name="AppTheme1" parent="Theme.AppCompat.Light.NoActionBar">

@@ -7,6 +7,9 @@ import android.text.TextUtils;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.yuplo.R;
 
 import org.parceler.Parcels;
 
@@ -15,6 +18,7 @@ public class SimpleFragmentManager {
 
     public static final String KEY_TAGS = "key_tags";
     private final FragmentManager fragmentManager;
+    private final FragmentTransaction transaction = null;
     private final int fragmentContainerId;
     private FragmentTagStack fragmentTagStack = new FragmentTagStack();
     private static String STACK_LAST_FRAGMENT_NAME = "";
@@ -36,6 +40,7 @@ public class SimpleFragmentManager {
     public void replaceFragment(IFragment fragment) {
         fragmentTagStack.push(fragment.getFragmentName());
         fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right)
                 .replace(fragmentContainerId, (Fragment) fragment, fragment.getFragmentName())
                 .addToBackStack(fragment.getFragmentName())
                 .commitAllowingStateLoss();

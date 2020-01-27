@@ -71,6 +71,7 @@ public class SignUpPresenter implements NetworkInterface {
         if (utils.isOnline(context)) {
             networkCall.register(apiInterface, data, this);
         } else {
+            pListener.dismissProgress();
             KToast.customColorToast((Activity) context, " Please Check Your Network Connection", Gravity.BOTTOM, KToast.LENGTH_SHORT, R.color.red);
         }
     }

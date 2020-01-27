@@ -9,7 +9,9 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.View;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.yuplo.R;
 
 public class Utils {

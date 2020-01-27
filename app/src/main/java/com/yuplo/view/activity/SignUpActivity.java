@@ -8,10 +8,12 @@ import android.widget.ProgressBar;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.yuplo.R;
 import com.yuplo.base.BaseActivity;
 import com.yuplo.presenter.signIn.ISignUpPresenter;
 import com.yuplo.presenter.signIn.SignUpPresenter;
+import com.yuplo.support.Internet.NetworkChangeReceiver;
 
 import javax.inject.Inject;
 
@@ -35,6 +37,9 @@ public class SignUpActivity extends BaseActivity implements ISignUpPresenter {
     EditText con_password;
     @BindView(R.id.progressbar)
     ConstraintLayout progressBar;
+    @BindView(R.id.parent_layout)
+    ConstraintLayout pl;
+    private Snackbar snackbar;
 
 
     @Override
@@ -84,5 +89,13 @@ public class SignUpActivity extends BaseActivity implements ISignUpPresenter {
         if (progressBar.getVisibility() == View.VISIBLE) {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+//        startActivity(new Intent(this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+
     }
 }
