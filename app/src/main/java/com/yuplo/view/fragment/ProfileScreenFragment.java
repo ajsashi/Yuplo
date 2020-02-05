@@ -128,7 +128,6 @@ public class ProfileScreenFragment extends BaseFragment implements IFragment {
         profileImage.setImageURI(uri);
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

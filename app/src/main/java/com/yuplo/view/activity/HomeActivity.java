@@ -121,7 +121,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         injector().inject(this);
         presenter.init(this);
         fragmentManagerHandler.setFragmentContainerId(flContainer);
-        showHome();
+//        showHome();
+        showNewSchedule();
         addSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,13 +156,16 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         switch (id) {
             case R.id.nav_profile:
                 showProfile();
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 break;
             case R.id.nav_schedule:
                 showSchedule();
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 break;
 
             case R.id.nav_manage_address:
                 showManageAddress();
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 break;
             case R.id.nav_logout:
                 presenter.logout();
@@ -182,7 +186,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void changeNavigationIcon() {
         toggle.setDrawerIndicatorEnabled(false);
-        toggle.setHomeAsUpIndicator(R.drawable.back_button);
+        toggle.setHomeAsUpIndicator(R.drawable.backbutton);
     }
 
     @Override
@@ -236,13 +240,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         int stack = simpleFragmentManager.getBackStackEntry();
 
         Log.d("Stack", String.valueOf(stack));
-
-
         if (!isNotRoot) {
             finish();
             return;
         } else if (isNotRoot && stack == 1) {
             toggle.setDrawerIndicatorEnabled(true);
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         }
 
         for (String backPressed : FRAGMENTS) {

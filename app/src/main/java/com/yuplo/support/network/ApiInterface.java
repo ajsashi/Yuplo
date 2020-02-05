@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface ApiInterface {
     @POST("login")
@@ -18,4 +19,7 @@ public interface ApiInterface {
 
     @POST("register")
     Call<ResponseBody> getUserSignUp(@Body JsonObject json);
+
+    @GET
+    Call<String> getPath(@Url String url);
 }

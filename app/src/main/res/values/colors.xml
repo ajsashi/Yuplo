@@ -11,4 +11,5 @@
     <color name="grey_progressbar">#C3D7D7D7</color>
     <color name="nav_bg">#3f4c67</color>
     <color name="orange">#ff4203</color>
+    <color name="route_num_color">#00509A</color>
 </resources>

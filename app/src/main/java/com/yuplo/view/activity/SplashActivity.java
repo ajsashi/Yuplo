@@ -30,6 +30,7 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         injector().inject(this);
+
         Thread background = new Thread() {
             public void run() {
                 try {
@@ -39,8 +40,9 @@ public class SplashActivity extends BaseActivity {
                         startActivity(new Intent(getApplicationContext(), HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
 
                 }
-                    else
+                    else {
                         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
